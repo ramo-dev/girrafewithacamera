@@ -1,0 +1,43 @@
+.message-bubble {
+    max-width: 70%;
+    margin: 8px 2px;
+    padding: 8px 12px; /* Adjusted for better padding */
+    border-radius: 12px;
+    font-size: 16px;
+    border: 1px solid rgba(128, 128, 128, 0.267);
+    box-shadow: 0px 0px 10px rgba(128, 128, 128, 0.001);
+    min-width: 10%;
+}
+
+ .my-response::before{
+    content: "you :";
+    position: relative;
+    font-weight: bolder;
+    top: 0%;
+    display: block;
+    font-size: 16px;
+    text-decoration: underline;
+    text-underline-offset: 10 ;
+  }
+
+  .ai-response::before {
+    content: "Giraffe Ai :";
+    position: relative;
+    font-weight: bolder;
+    top: 0%;
+    display: block;
+    font-size: 16px;
+    text-decoration: underline;
+    margin: 0 0 10px 0;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display:none;
+}
+
+@media screen and (max-width : 500px){
+  .message-bubble {
+    max-width: 100%;
+   }
+
+}

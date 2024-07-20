@@ -1,31 +1,51 @@
 
 "use client";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Table, TableHeader, TableRow, TableCell, TableHead, TableBody } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
 import { Card, CardDescription, CardHeader, CardTitle, CardFooter, CardContent } from '@/components/ui/card';
+import {account} from "../../utils/firebase.js"
+
 
 const Page = () => {
+  const [profilePhoto, setProfilePhoto] = useState(null);
+  const [socialMedia, setSocialMedia] = useState({
+    twitter : String,
+    linkedin : String,
+    instagram : String
+  });
+  const [email, setEmail] = useState("");
+
+  useEffect(()=>{
+   const unsubscribe = account.onAuthStateChanged((user)=>{
+        console.log(user?.email);
+    }) 
+
+    return () => unsubscribe();
+  },[])
+
+
+
   return (
     <main className="flex-1">
       <div className="mx-auto max-w-7xl space-y-8">
       <div className="flex flex-wrap gap-6"> 
-        <Card className="flex-1 min-w-[400px]">
+        <Card className="flex-1 md:min-w-[400px]  bg-background">
             <CardHeader>
               <CardTitle>Profile Photo</CardTitle>
               <CardDescription>Update your profile photo.</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="flex flex-col items-start gap-4">
-                <div className="w-40 h-40 rounded-full bg-gray-300/20"></div>
-                <Button variant="outline" className="w-5/12">Change Photo</Button>
+                <div className="w-40 h-40 rounded-full bg-gray-300/20 "></div>
+                <Button variant="outline" className="md:w-5/12 w-7/12">Change Photo</Button>
               </div>
             </CardContent>
           </Card>
-          <Card className="flex-1 min-w-[300px]">
+          <Card className="flex-1 min-w-[300px] bg-background">
             <CardHeader>
               <CardTitle>Change Password</CardTitle>
               <CardDescription>Update your account password.</CardDescription>
@@ -51,7 +71,7 @@ const Page = () => {
             </CardFooter>
           </Card>
           
-          <Card className="flex-1 min-w-[300px]">
+          <Card className="flex-1 min-w-[300px] bg-background">
             <CardHeader>
               <CardTitle>Social Media</CardTitle>
               <CardDescription>Connect your social media accounts.</CardDescription>
@@ -76,7 +96,7 @@ const Page = () => {
               <Button>Save Changes</Button>
             </CardFooter>
           </Card>
-          <Card className="flex-1 min-w-[300px]">
+          <Card className="flex-1 min-w-[300px] bg-background">
             <CardHeader>
               <CardTitle>Email</CardTitle>
               <CardDescription>Update your email address.</CardDescription>
